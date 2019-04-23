@@ -1,9 +1,11 @@
-﻿using System;
+﻿using InventoryAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace InventoryAPI.Controllers
 {
@@ -12,31 +14,52 @@ namespace InventoryAPI.Controllers
 
         private string apiVersion = Resources.API_INFO.API_VERSION;
 
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        public HttpResponseMessage GetCategory()
         {
-            return new string[] { "value1", "value2" };
+            var objeto = new Category();
+   
+            return Request.CreateResponse(HttpStatusCode.OK, objeto, Configuration.Formatters.JsonFormatter);
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet]
+        public HttpResponseMessage GetCategory(int id)
         {
-            return "value";
+            var objeto = new Category();
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, objeto, Configuration.Formatters.JsonFormatter);
+            response.Headers.Add("API Version", apiVersion);
+
+            return response;
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public HttpResponseMessage PostCategory(Category category)
         {
+            var response = Request.CreateResponse(HttpStatusCode.Created, category, Configuration.Formatters.JsonFormatter);
+            response.Headers.Add("API Version", apiVersion);
+
+            return response;
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public HttpResponseMessage UpdateCategory(int categoryID, Category category)
         {
+            var response = Request.CreateResponse(HttpStatusCode.OK, category, Configuration.Formatters.JsonFormatter);
+            response.Headers.Add("API Version", apiVersion);
+
+            return response;
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        [HttpDelete]
+        public HttpResponseMessage DeleteCategory(int categoryID)
         {
+            var objeto = new Category();
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, objeto, Configuration.Formatters.JsonFormatter);
+            response.Headers.Add("API Version", apiVersion);
+
+            return response;
         }
     }
 }

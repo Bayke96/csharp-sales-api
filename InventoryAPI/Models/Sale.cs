@@ -12,18 +12,18 @@ namespace InventoryAPI.Models
     {
         [Column("s_id")]
         [Key]
-        private int ID;
+        public int ID { get; private set; }
 
         [Column("s_date")]
-        private DateTime saleDate { get; set; } = new DateTime();
+        public DateTime saleDate { get; set; } = new DateTime();
 
         [Column("s_description"), Required]
         [MinLength(4), StringLength(255)]
-        private string saleDescription { get; set; }
+        public string saleDescription { get; set; }
 
         [Column("s_total"), Required]
         [Range(0.0, Double.MaxValue)]
-        private decimal saleTotal { get; set; }
+        public decimal saleTotal { get; set; }
 
     }
 }

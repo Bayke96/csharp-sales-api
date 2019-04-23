@@ -12,13 +12,13 @@ namespace InventoryAPI.Models
     {
         [Column("stats_id")]
         [Key]
-        private int ID { get; set; }
+        public int ID { get; private set; }
 
-        [Column("month"), Index(IsUnique = true)]
-        private string salesDate { get; set; } = DateTime.Now.ToString("MMM-YYYY");
+        [Column("month"), Index(IsUnique = true), Required]
+        public string salesDate { get; set; } = DateTime.Now.ToString("MMM-YYYY");
 
         [Column("monthly_sales"), Required]
-        private int productsSold { get; set; }
+        public int productsSold { get; set; }
 
     }
 }

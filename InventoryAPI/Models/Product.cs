@@ -13,29 +13,29 @@ namespace InventoryAPI.Models
     {
         [Column("p_id")]
         [Key]
-        private int ID { get; set; }
+        public int ID { get; private set; }
 
-        private Category Category { get; set; }
+        public Category Category { get; set; }
 
         [Column("c_id")]
         [ForeignKey("Category")]
-        private int categoryID { get; set; }
+        public int categoryID { get; set; }
 
         [Column("p_name"), Required]
         [Index(IsUnique = true), MinLength(3)]
-        private string productName { get; set; }
+        public string productName { get; set; }
 
         [Column("p_description"), Required]
         [MinLength(4), StringLength(255)]
-        private string productDescription { get; set; }
+        public string productDescription { get; set; }
 
         [Column("p_price"), Required]
         [Range(0.0, Double.MaxValue)]
-        private decimal productPrice { get; set; }
+        public decimal productPrice { get; set; }
 
         [Column("p_ammount")]
         [Range(0, Int32.MaxValue)]
-        private int productAmmount { get; set; } = 0;
+        public int productAmmount { get; set; } = 0;
 
     }
 }

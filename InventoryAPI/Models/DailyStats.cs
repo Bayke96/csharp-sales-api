@@ -12,19 +12,19 @@ namespace InventoryAPI.Models
     {
         [Column("stats_id")]
         [Key]
-        private int ID { get; set; }
+        public int ID { get; private set; }
 
-        [Column("date"), Index(IsUnique = true)]
-        private DateTime salesDate { get; set; } = DateTime.Today;
+        [Column("date"), Index(IsUnique = true), Required]
+        public DateTime salesDate { get; set; } = DateTime.Today;
 
-        private Product Product { get; set; }
+        public Product Product { get; set; }
 
         [Column("most_sold")]
         [ForeignKey("Product")]
-        private int mostSold { get; set; }
+        public int mostSold { get; set; }
 
         [Column("items_sold"), Required]
-        private int productsSold { get; set; }
+        public int productsSold { get; set; }
 
     }
 }

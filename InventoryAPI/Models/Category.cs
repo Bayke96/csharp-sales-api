@@ -11,15 +11,15 @@ namespace InventoryAPI.Models
     public class Category
     {
         [Key, Column("cat_id")]
-        private int ID { get; set; }
-
+        public int ID { get; private set; }
+        
         [Column("cat_name"), Index(IsUnique = true)]
         [ConcurrencyCheck, Required, MinLength(3), MaxLength(50)]
-        private string categoryName { get; set; }
-
+        public string categoryName { get; set; }
+        
         [Column("cat_products")]
         [Required]
-        private int ammountProducts { get; set; }
+        public int ammountProducts { get; set; }
 
     }
 }

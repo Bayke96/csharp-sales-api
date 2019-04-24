@@ -26,5 +26,10 @@ namespace InventoryAPI.Models
         [Column("items_sold"), Required]
         public int productsSold { get; set; }
 
+        public DailyStats()
+        {
+
+        }
+
     }
 }

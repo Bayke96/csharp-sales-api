@@ -1,5 +1,6 @@
 ﻿using InventoryAPI.DB_Config;
 using InventoryAPI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,15 @@ using System.Web;
 
 namespace InventoryAPI.Services
 {
+
     public class CategoryServices
     {
-
+        
         public List<Category> GetCategory()
         {
             using(var context = new ServicesContext())
             {
-                var allCategories = context.Categories.OrderBy(b => b.ID).ToList();
+                var allCategories = context.Categories.ToList();
                 return allCategories;
             }
         }
@@ -23,7 +25,7 @@ namespace InventoryAPI.Services
         {
             using(var context = new ServicesContext())
             {
-                var category = context.Categories.SingleOrDefault(b => b.ID == id);
+                var category = context.Categories.FirstOrDefault(b => b.ID == id);
                 return category;
             }
         }
@@ -34,19 +36,24 @@ namespace InventoryAPI.Services
             {
                 context.Categories.Add(category);
                 context.SaveChanges();
+
+                var newestCategory = context.Categories.ToArray().Last();
+                return newestCategory;
             }
-            return category;
         }
 
         public Category UpdateCategory(int categoryID, Category category)
         {
             using(var context = new ServicesContext())
             {
-                var selectedCategory = context.Categories.SingleOrDefault(b => b.ID == categoryID);
+                var selectedCategory = context.Categories.FirstOrDefault(b => b.ID == categoryID);
 
-                selectedCategory.categoryName = category.categoryName;
-                selectedCategory.ammountProducts = category.ammountProducts;
-                context.SaveChanges();
+                if(selectedCategory != null)
+                {
+                    selectedCategory.categoryName = category.categoryName;
+                    selectedCategory.ammountProducts = category.ammountProducts;
+                    context.SaveChanges();
+                }
 
                 return selectedCategory;
             }
@@ -57,10 +64,13 @@ namespace InventoryAPI.Services
         {
             using(var context = new ServicesContext())
             {
-                var selectedCategory = context.Categories.SingleOrDefault(b => b.ID == categoryID);
+                var selectedCategory = context.Categories.FirstOrDefault(b => b.ID == categoryID);
 
-                context.Categories.Remove(selectedCategory);
-                context.SaveChanges();
+                if(selectedCategory != null)
+                {
+                    context.Categories.Remove(selectedCategory);
+                    context.SaveChanges();
+                }
 
                 return selectedCategory;
             }

@@ -16,10 +16,15 @@ namespace InventoryAPI.Models
         [Column("cat_name"), Index(IsUnique = true)]
         [ConcurrencyCheck, Required, MinLength(3), MaxLength(50)]
         public string categoryName { get; set; }
-        
+
         [Column("cat_products")]
         [Required]
-        public int ammountProducts { get; set; }
+        public int ammountProducts { get; set; } = 0;
+
+        public Category()
+        {
+
+        }
 
     }
 }

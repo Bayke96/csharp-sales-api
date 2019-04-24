@@ -15,10 +15,16 @@ namespace InventoryAPI.Models
         public int ID { get; private set; }
 
         [Column("month"), Index(IsUnique = true), Required]
+        [MinLength(3), MaxLength(50)]
         public string salesDate { get; set; } = DateTime.Now.ToString("MMM-YYYY");
 
         [Column("monthly_sales"), Required]
         public int productsSold { get; set; }
+
+        public MonthlyStats()
+        {
+
+        }
 
     }
 }

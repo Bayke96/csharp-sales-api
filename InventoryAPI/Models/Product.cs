@@ -22,7 +22,7 @@ namespace InventoryAPI.Models
         public int categoryID { get; set; }
 
         [Column("p_name"), Required]
-        [Index(IsUnique = true), MinLength(3)]
+        [Index(IsUnique = true), MinLength(3), MaxLength(255)]
         public string productName { get; set; }
 
         [Column("p_description"), Required]
@@ -36,6 +36,11 @@ namespace InventoryAPI.Models
         [Column("p_ammount")]
         [Range(0, Int32.MaxValue)]
         public int productAmmount { get; set; } = 0;
+
+        public Product()
+        {
+
+        }
 
     }
 }

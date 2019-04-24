@@ -119,6 +119,6 @@
   </resheader>
   <data name="API_VERSION" xml:space="preserve">
     <value>V-1.0</value>
-    <comment>The version of the API.</comment>
+    <comment>The current version of the API</comment>
   </data>
 </root>

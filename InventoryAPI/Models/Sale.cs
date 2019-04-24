@@ -25,5 +25,10 @@ namespace InventoryAPI.Models
         [Range(0.0, Double.MaxValue)]
         public decimal saleTotal { get; set; }
 
+        public Sale()
+        {
+
+        }
+
     }
 }

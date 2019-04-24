@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace InventoryAPI
@@ -13,11 +14,16 @@ namespace InventoryAPI
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            config.Formatters.XmlFormatter.
+                SupportedMediaTypes.Add(
+                new System.Net.Http.Headers.MediaTypeHeaderValue("multipart/form-data"));
 
             config.Routes.MapHttpRoute(
                 name: "API",
-                routeTemplate: "/{controller}"
+                routeTemplate: "{controller}"
             );
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }
 }

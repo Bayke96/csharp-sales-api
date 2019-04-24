@@ -15,6 +15,11 @@ namespace InventoryAPI.DB_Config
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ServicesContext>());
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("api");
+        }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }

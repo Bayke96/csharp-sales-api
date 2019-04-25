@@ -9,12 +9,67 @@ namespace InventoryAPI.Services
 {
     public class ProductServices
     {
-
         public List<Product> GetProduct()
         {
             using (var context = new ServicesContext())
             {
-                var allProducts = context.Products.OrderBy(b => b.ID).ToList();
+                var allProducts = context.Products.ToList();
+                return allProducts;
+            }
+        }
+
+        public List<Product> GetProductOrder(string order, string orderBy)
+        {
+            List<Product> allProducts = new List<Product>();
+
+            using (var context = new ServicesContext())
+            {
+                if (order.ToUpper() == "ASC")
+                {
+                    if (orderBy.ToUpperInvariant() == "ID")
+                    {
+                        allProducts = context.Products.OrderBy(b => b.ID).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "NAME")
+                    {
+                        allProducts = context.Products.OrderBy(b => b.productName).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "DESCRIPTION")
+                    {
+                        allProducts = context.Products.OrderBy(b => b.productDescription).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "PRICE")
+                    {
+                        allProducts = context.Products.OrderBy(b => b.productPrice).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "AMMOUNT")
+                    {
+                        allProducts = context.Products.OrderBy(b => b.productAmmount).ToList();
+                    }
+                }
+                else
+                {
+                    if (orderBy.ToUpperInvariant() == "ID")
+                    {
+                        allProducts = context.Products.OrderByDescending(b => b.ID).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "NAME")
+                    {
+                        allProducts = context.Products.OrderByDescending(b => b.productName).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "DESCRIPTION")
+                    {
+                        allProducts = context.Products.OrderByDescending(b => b.productDescription).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "PRICE")
+                    {
+                        allProducts = context.Products.OrderByDescending(b => b.productPrice).ToList();
+                    }
+                    if (orderBy.ToUpperInvariant() == "AMMOUNT")
+                    {
+                        allProducts = context.Products.OrderByDescending(b => b.productAmmount).ToList();
+                    }
+                }
                 return allProducts;
             }
         }
@@ -23,7 +78,18 @@ namespace InventoryAPI.Services
         {
             using (var context = new ServicesContext())
             {
-                var product = context.Products.SingleOrDefault(b => b.ID == id);
+                var product = context.Products.FirstOrDefault(b => b.ID == id);
+                return product;
+            }
+        }
+
+        public Product GetProduct(string name)
+        {
+            var searchName = name.ToUpper().Trim();
+            using (var context = new ServicesContext())
+            {
+                var product = context.Products.FirstOrDefault
+                    (b => b.productName.ToUpper() == searchName);
                 return product;
             }
         }
@@ -32,42 +98,90 @@ namespace InventoryAPI.Services
         {
             using (var context = new ServicesContext())
             {
-                context.Products.Add(product);
-                context.SaveChanges();
+                // Check if product already exists within database.
+                var findExistingProduct = context.Products.FirstOrDefault
+                    (b => b.productName.ToUpper() == product.productName.ToUpper());
+
+                // Product object corrections
+                product.productName = product.productName.Trim();
+                product.productDescription = product.productDescription.Trim();
+
+                // Product doesn't exist.
+                if (findExistingProduct == null)
+                {
+                    // Sum one to the counter of the product's category
+                    var category = context.Categories.Single(b => b.ID == product.categoryID);
+                    category.ammountProducts++;
+
+                    context.Products.Add(product);
+                    context.SaveChanges();
+
+                    var newestProduct = context.Products.ToArray().Last();
+                    return newestProduct;
+                }
+                // Product already exists
+                else
+                {
+                    return null;
+                }
             }
-            return product;
         }
 
         public Product UpdateProduct(int productID, Product product)
         {
             using (var context = new ServicesContext())
             {
-                var selectedProduct = context.Products.SingleOrDefault(b => b.ID == productID);
+                var selectedProduct = context.Products.FirstOrDefault(b => b.ID == productID);
 
-                selectedProduct.categoryID = product.categoryID;
-                selectedProduct.productName = product.productName;
-                selectedProduct.productDescription = product.productDescription;
-                selectedProduct.productPrice = product.productPrice;
-                selectedProduct.productAmmount = product.productAmmount;
-                context.SaveChanges();
+                // Checking if the product does exist within the database.
+                if (selectedProduct != null)
+                {
+                    // Update category counters if a new category has been set for the product.
+                    if(selectedProduct.categoryID != product.categoryID)
+                    {
+                        var oldCategory = context.Categories.Single(b => b.ID == selectedProduct.categoryID);
+                        oldCategory.ammountProducts--;
+                        var newCategory = context.Categories.Single(b => b.ID == product.categoryID);
+                        newCategory.ammountProducts++;
+                    }
+                    
+                    selectedProduct.categoryID = product.categoryID;
+                    selectedProduct.productName = product.productName.Trim();
+                    selectedProduct.productDescription = product.productDescription.Trim();
+                    selectedProduct.productAmmount = product.productAmmount;
+                    selectedProduct.productPrice = product.productPrice;
+                    context.SaveChanges();
 
-                return selectedProduct;
+                    return selectedProduct;
+                }
+                // If it does not, return null.
+                else
+                {
+                    return null;
+                }
             }
-
         }
 
         public Product DeleteProduct(int productID)
         {
             using (var context = new ServicesContext())
             {
-                var selectedProduct = context.Products.SingleOrDefault(b => b.ID == productID);
+                var selectedProduct = context.Products.FirstOrDefault(b => b.ID == productID);
 
-                context.Products.Remove(selectedProduct);
-                context.SaveChanges();
+                // Checking if the category exists within the database.
+                if (selectedProduct != null)
+                {
+                    context.Products.Remove(selectedProduct);
+                    context.SaveChanges();
 
-                return selectedProduct;
+                    return selectedProduct;
+                }
+                // If it does not, return null.
+                else
+                {
+                    return null;
+                }
             }
         }
-
     }
 }

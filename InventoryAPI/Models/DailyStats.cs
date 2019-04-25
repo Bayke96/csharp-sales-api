@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace InventoryAPI.Models
 {
@@ -17,11 +19,12 @@ namespace InventoryAPI.Models
         [Column("date"), Index(IsUnique = true), Required]
         public DateTime salesDate { get; set; } = DateTime.Today;
 
-        public Product Product { get; set; }
+        public int mostSold { get; set; }
 
         [Column("most_sold")]
-        [ForeignKey("Product")]
-        public int mostSold { get; set; }
+        [ForeignKey("mostSold")]
+        [JsonIgnore]
+        public virtual Product Product { get; set; }
 
         [Column("items_sold"), Required]
         public int productsSold { get; set; }

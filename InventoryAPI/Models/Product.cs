@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace InventoryAPI.Models
 {
@@ -15,11 +17,12 @@ namespace InventoryAPI.Models
         [Key]
         public int ID { get; private set; }
 
-        public Category Category { get; set; }
-
         [Column("c_id")]
-        [ForeignKey("Category")]
         public int categoryID { get; set; }
+
+        [ForeignKey("categoryID")]
+        [JsonIgnore]
+        public virtual Category Category { get; set; }
 
         [Column("p_name"), Required]
         [Index(IsUnique = true), MinLength(3), MaxLength(255)]

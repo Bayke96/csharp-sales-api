@@ -15,7 +15,7 @@ namespace InventoryAPI.Models
         public int ID { get; private set; }
 
         [Column("s_date")]
-        public DateTime saleDate { get; set; } = new DateTime();
+        public DateTime saleDate { get; set; } = DateTime.Now;
 
         [Column("s_description"), Required]
         [MinLength(4), StringLength(255)]

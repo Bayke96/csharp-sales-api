@@ -9,61 +9,90 @@ namespace InventoryAPI.Services
 {
     public class MonthlyStatsServices
     {
-        public List<MonthlyStats> GetMonthlyStats()
+        public List<MonthlyStats> GetDailyStats()
         {
             using (var context = new ServicesContext())
             {
-                var allMonthlyStats = context.monthlyStats.OrderBy(b => b.ID).ToList();
+                var allMonthlyStats = context.monthlyStats.ToList();
                 return allMonthlyStats;
             }
         }
 
-        public MonthlyStats GetMonthlyStats(int id)
+        public MonthlyStats GetMonthlyStat(int id)
         {
             using (var context = new ServicesContext())
             {
-                var monthlyStat = context.monthlyStats.SingleOrDefault(b => b.ID == id);
+                var monthlyStat = context.monthlyStats.FirstOrDefault(b => b.ID == id);
                 return monthlyStat;
             }
         }
 
-        public MonthlyStats CreateMonthlyStat(MonthlyStats stat)
+        public MonthlyStats CreateMonthlyStat(MonthlyStats monthlyStat)
         {
             using (var context = new ServicesContext())
             {
-                context.monthlyStats.Add(stat);
-                context.SaveChanges();
+                // Check if there's already a stat for this month.
+                var findMonthlyStat = context.monthlyStats.FirstOrDefault
+                    (b => b.salesMonth == monthlyStat.salesMonth && b.salesYear == monthlyStat.salesYear);
+
+                // If there isn't, create one.
+                if (findMonthlyStat == null)
+                {
+                    context.monthlyStats.Add(monthlyStat);
+                    context.SaveChanges();
+                    return monthlyStat;
+                }
+                // If there is, return null and let the controller handle it.
+                else
+                {
+                    return null;
+                }
             }
-            return stat;
         }
 
-        public MonthlyStats UpdateMonthlyStat(int statID, MonthlyStats stat)
+        public MonthlyStats UpdateMonthlyStat(int statID, MonthlyStats monthlyStat)
         {
             using (var context = new ServicesContext())
             {
-                var selectedMStat = context.monthlyStats.SingleOrDefault(b => b.ID == statID);
+                var selectedStat = context.monthlyStats.FirstOrDefault(b => b.ID == statID);
 
-                selectedMStat.salesDate = stat.salesDate;
-                selectedMStat.productsSold = stat.productsSold;
-                context.SaveChanges();
+                // Checking if the stat does exist within the database.
+                if (selectedStat != null)
+                {
+                    selectedStat.salesMonth = monthlyStat.salesMonth;
+                    selectedStat.salesYear = monthlyStat.salesYear;
+                    context.SaveChanges();
 
-                return selectedMStat;
+                    return selectedStat;
+                }
+                // If it does not, return null.
+                else
+                {
+                    return null;
+                }
             }
-
         }
 
         public MonthlyStats DeleteMonthlyStat(int statID)
         {
             using (var context = new ServicesContext())
             {
-                var selectedMStat = context.monthlyStats.SingleOrDefault(b => b.ID == statID);
+                var selectedMonthlyStat = context.monthlyStats.FirstOrDefault(b => b.ID == statID);
 
-                context.monthlyStats.Remove(selectedMStat);
-                context.SaveChanges();
+                // Checking if the monthly stats exists within the database.
+                if (selectedMonthlyStat != null)
+                {
+                    context.monthlyStats.Remove(selectedMonthlyStat);
+                    context.SaveChanges();
 
-                return selectedMStat;
+                    return selectedMonthlyStat;
+                }
+                // If it does not, return null.
+                else
+                {
+                    return null;
+                }
             }
         }
-
     }
 }

@@ -19,15 +19,8 @@ namespace InventoryAPI.Models
         [Column("date"), Index(IsUnique = true), Required]
         public DateTime salesDate { get; set; } = DateTime.Today;
 
-        public int mostSold { get; set; }
-
-        [Column("most_sold")]
-        [ForeignKey("mostSold")]
-        [JsonIgnore]
-        public virtual Product Product { get; set; }
-
         [Column("items_sold"), Required]
-        public int productsSold { get; set; }
+        public int productsSold { get; set; } = 0;
 
     }
 }

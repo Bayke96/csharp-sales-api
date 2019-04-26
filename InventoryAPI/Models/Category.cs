@@ -21,10 +21,5 @@ namespace InventoryAPI.Models
         [Required]
         public int ammountProducts { get; set; } = 0;
 
-        public Category()
-        {
-
-        }
-
     }
 }

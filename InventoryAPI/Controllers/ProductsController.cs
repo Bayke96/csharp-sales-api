@@ -13,8 +13,8 @@ namespace InventoryAPI.Controllers
 {
     public class ProductsController : ApiController
     {
-        public string apiVersion = Resources.API_INFO.API_VERSION;
-        private ProductServices productService = new ProductServices();
+        private string apiVersion = Resources.API_INFO.API_VERSION;
+        private readonly ProductServices productService = new ProductServices();
 
         [HttpGet]
         [Route("inventory/products")]

@@ -17,8 +17,8 @@ namespace InventoryAPI.Controllers
 {
     public class CategoriesController : ApiController
     {
-        public string apiVersion = Resources.API_INFO.API_VERSION;
-        private CategoryServices categoryService = new CategoryServices();
+        private string apiVersion = Resources.API_INFO.API_VERSION;
+        private readonly CategoryServices categoryService = new CategoryServices();
         
         [HttpGet]
         [Route("inventory/categories")]

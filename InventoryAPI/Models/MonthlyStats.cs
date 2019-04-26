@@ -21,10 +21,5 @@ namespace InventoryAPI.Models
         [Column("monthly_sales"), Required]
         public int productsSold { get; set; }
 
-        public MonthlyStats()
-        {
-
-        }
-
     }
 }

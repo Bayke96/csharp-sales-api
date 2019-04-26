@@ -7,7 +7,7 @@ using System.Web;
 
 namespace InventoryAPI.DB_Config
 {
-    public partial class ServicesContext : DbContext
+    public class ServicesContext : DbContext
     {
         public ServicesContext()
             : base("Inventory-Sales")

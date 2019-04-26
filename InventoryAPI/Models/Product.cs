@@ -40,10 +40,5 @@ namespace InventoryAPI.Models
         [Range(0, Int32.MaxValue)]
         public int productAmmount { get; set; } = 0;
 
-        public Product()
-        {
-
-        }
-
     }
 }

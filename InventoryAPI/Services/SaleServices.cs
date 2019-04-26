@@ -9,7 +9,6 @@ namespace InventoryAPI.Services
 {
     public class SaleServices
     {
-
         public List<Sale> GetSale()
         {
             using (var context = new ServicesContext())

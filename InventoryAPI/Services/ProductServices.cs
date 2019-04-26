@@ -2,6 +2,7 @@
 using InventoryAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -24,7 +25,7 @@ namespace InventoryAPI.Services
 
             using (var context = new ServicesContext())
             {
-                if (order.ToUpper() == "ASC")
+                if (order.ToUpper(CultureInfo.InvariantCulture) == "ASC")
                 {
                     if (orderBy.ToUpperInvariant() == "ID")
                     {
@@ -85,7 +86,7 @@ namespace InventoryAPI.Services
 
         public Product GetProduct(string name)
         {
-            var searchName = name.ToUpper().Trim();
+            string searchName = name.ToUpper(CultureInfo.InvariantCulture).Trim();
             using (var context = new ServicesContext())
             {
                 var product = context.Products.FirstOrDefault

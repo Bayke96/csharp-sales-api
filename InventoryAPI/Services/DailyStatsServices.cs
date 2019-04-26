@@ -87,7 +87,7 @@ namespace InventoryAPI.Services
                         (b => b.salesMonth == selectedDailyStat.salesDate.Month && 
                         b.salesYear == selectedDailyStat.salesDate.Year);
 
-                    if (selectedMonthlyStat != null) selectedMonthlyStat.productsSold -= selectedDailyStat.productsSold;
+                    if (selectedMonthlyStat != null) { selectedMonthlyStat.productsSold -= selectedDailyStat.productsSold; }
 
                     context.dailyStats.Remove(selectedDailyStat);
                     context.SaveChanges();

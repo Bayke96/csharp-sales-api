@@ -142,8 +142,8 @@ namespace InventoryAPI.Services
                     var selectedMonthlyStat = context.monthlyStats.FirstOrDefault
                         (b => b.salesMonth == selectedSale.saleDate.Month && b.salesYear == selectedSale.saleDate.Year);
 
-                    if (selectedDailyStat != null) selectedDailyStat.productsSold--;
-                    if (selectedMonthlyStat != null) selectedMonthlyStat.productsSold--;
+                    if (selectedDailyStat != null) { selectedDailyStat.productsSold--; }
+                    if (selectedMonthlyStat != null) { selectedMonthlyStat.productsSold--; }
 
                     context.Sales.Remove(selectedSale);
                     context.SaveChanges();

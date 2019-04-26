@@ -172,6 +172,10 @@ namespace InventoryAPI.Services
                 // Checking if the category exists within the database.
                 if (selectedProduct != null)
                 {
+                    // Minus one from the counter of the product's category.
+                    var selectedCategory = context.Categories.FirstOrDefault(b => b.ID == selectedProduct.categoryID);
+                    selectedCategory.ammountProducts--;
+
                     context.Products.Remove(selectedProduct);
                     context.SaveChanges();
 

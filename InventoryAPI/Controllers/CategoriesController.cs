@@ -17,7 +17,7 @@ namespace InventoryAPI.Controllers
 {
     public class CategoriesController : ApiController
     {
-        private string apiVersion = Resources.API_INFO.API_VERSION;
+        private readonly string apiVersion = Resources.API_INFO.API_VERSION;
         private readonly CategoryServices categoryService = new CategoryServices();
         
         [HttpGet]
@@ -27,7 +27,6 @@ namespace InventoryAPI.Controllers
             var categoryList = categoryService.GetCategory();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
             HttpContext.Current.Response.AppendHeader("Response-Object-Length", categoryList.Count.ToString() + " Items");
             HttpContext.Current.Response.AppendHeader("List-URL", Request.RequestUri.AbsoluteUri);
@@ -43,7 +42,6 @@ namespace InventoryAPI.Controllers
             var categoryList = categoryService.GetCategoryOrder(order.Trim(), orderBy.Trim());
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
             HttpContext.Current.Response.AppendHeader("Response-Object-Length", categoryList.Count.ToString() + " Items");
             HttpContext.Current.Response.AppendHeader("List-URL", Request.RequestUri.AbsoluteUri);
@@ -59,7 +57,6 @@ namespace InventoryAPI.Controllers
             Category category = categoryService.GetCategory(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
 
             if(category == null)
             {
@@ -82,7 +79,6 @@ namespace InventoryAPI.Controllers
             Category category = categoryService.GetCategory(name);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
 
             if (category == null)
             {
@@ -120,7 +116,6 @@ namespace InventoryAPI.Controllers
             {
                 var response = Request.CreateResponse(HttpStatusCode.Created, category, Configuration.Formatters.JsonFormatter);
                 response.Headers.Add("API-Version", apiVersion);
-                response.Headers.Add("HTTP-Method", "POST");
                 response.Headers.Add("Response-Type", "JSON");
 
                 if (Request.RequestUri.AbsoluteUri.EndsWith("/"))
@@ -143,7 +138,6 @@ namespace InventoryAPI.Controllers
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedCategory, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
-            response.Headers.Add("HTTP-Method", "PUT");
             response.Headers.Add("Response-Type", "JSON");
             response.Headers.Add("Updated-Category-URL", Request.RequestUri.AbsoluteUri);
 
@@ -171,7 +165,6 @@ namespace InventoryAPI.Controllers
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedCategory, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
-            response.Headers.Add("HTTP-Method", "DELETE");
             response.Headers.Add("Response-Type", "JSON");
 
             if (deletedCategory == null)

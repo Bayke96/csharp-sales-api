@@ -13,7 +13,7 @@ namespace InventoryAPI.Controllers
 {
     public class ProductsController : ApiController
     {
-        private string apiVersion = Resources.API_INFO.API_VERSION;
+        private readonly string apiVersion = Resources.API_INFO.API_VERSION;
         private readonly ProductServices productService = new ProductServices();
 
         [HttpGet]
@@ -23,7 +23,6 @@ namespace InventoryAPI.Controllers
             var productList = productService.GetProduct();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
             HttpContext.Current.Response.AppendHeader("Response-Object-Length", productList.Count.ToString() + " Items");
             HttpContext.Current.Response.AppendHeader("List-URL", Request.RequestUri.AbsoluteUri);
@@ -39,7 +38,6 @@ namespace InventoryAPI.Controllers
             var productList = productService.GetProductOrder(order.Trim(), orderBy.Trim());
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
             HttpContext.Current.Response.AppendHeader("Response-Object-Length", productList.Count.ToString() + " Items");
             HttpContext.Current.Response.AppendHeader("List-URL", Request.RequestUri.AbsoluteUri);
@@ -55,7 +53,6 @@ namespace InventoryAPI.Controllers
             Product product = productService.GetProduct(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
 
             if (product == null)
             {
@@ -78,7 +75,6 @@ namespace InventoryAPI.Controllers
             Product product = productService.GetProduct(name);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
-            HttpContext.Current.Response.AppendHeader("HTTP-Method", "GET");
 
             if (product == null)
             {
@@ -117,7 +113,6 @@ namespace InventoryAPI.Controllers
                 var response = Request.CreateResponse(HttpStatusCode.Created, product, Configuration.Formatters.JsonFormatter);
                 response.Headers.Add("API-Version", apiVersion);
                 response.Headers.Add("HTTP-Method", "POST");
-                response.Headers.Add("Response-Type", "JSON");
 
                 if (Request.RequestUri.AbsoluteUri.EndsWith("/"))
                 {
@@ -139,7 +134,6 @@ namespace InventoryAPI.Controllers
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedProduct, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
-            response.Headers.Add("HTTP-Method", "PUT");
             response.Headers.Add("Response-Type", "JSON");
             response.Headers.Add("Updated-Product-URL", Request.RequestUri.AbsoluteUri);
 
@@ -167,7 +161,6 @@ namespace InventoryAPI.Controllers
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedProduct, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
-            response.Headers.Add("HTTP-Method", "DELETE");
             response.Headers.Add("Response-Type", "JSON");
 
             if (deletedProduct == null)

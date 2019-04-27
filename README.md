@@ -17,7 +17,7 @@ ROUTES:
 
 -   Categories
 
-	GET:	
+   GET:	
 	
 	/inventory/categories : Lists all of the existing categories,
 	
@@ -27,27 +27,27 @@ ROUTES:
 	
 	/inventory/categories/{order}/{orderby} : Lists all of the existing categories by Ascending or Descending order and by id, name or price.
 	
-	-   Available Params:
+   Available Params:
 	
 	Order: "asc", "desc".
 	
 	OrderBy: "id", "name", "ammount".
 	
-	POST:	
+   POST:	
 	
 	/inventory/categories : Creates a new category.
 	
-	PUT:
+   PUT:
 	
 	/inventory/categories/{id} : Updates an existing category based on its ID.
 	
-	DELETE:
+   DELETE:
 	
 	/inventory/categories/{id} : Deletes an existing category based on its ID.
 
 -   Products
 
-	GET:	
+   GET:	
 	
 	/inventory/products : Lists all of the existing products,
 	
@@ -58,27 +58,27 @@ ROUTES:
 	/inventory/products/{order}/{orderby} : Lists all of the existing products by Ascending or Descending order and by id, name, description, price 
 	or ammount existing in the inventory.
 	
-	-   Available Params:
+   Available Params:
 	
 	Order: "asc", "desc".
 	
 	OrderBy: "id", "name", "description", "price", "ammount".
 	
-	POST:	
+   POST:	
 	
 	/inventory/products : Creates a new product.
 	
-	PUT:
+   PUT:
 	
 	/inventory/products/{id} : Updates an existing product based on its ID.
 	
-	DELETE:
+   DELETE:
 	
 	/inventory/products/{id} : Deletes an existing product based on its ID.
 
 -   Sales
 
-	GET:	
+   GET:	
 	
 	/sales : Lists all of the existing sales,
 	
@@ -93,54 +93,54 @@ ROUTES:
 	
 	OrderBy: "id", "date", "description", "total".
 	
-	POST:	
+   POST:	
 	
 	/sales : Creates a new sale.
 	
-	PUT:
+   PUT:
 	
 	/sales/{id} : Updates an existing sale based on its ID.
 	
-	DELETE:
+   DELETE:
 	
 	/sales/{id} : Deletes an existing sale based on its ID.
 
 -   Daily Sale Stats
 
-	GET:	
+   GET:	
 	
 	/salestats/dailystats : Lists all of the existing daily sales stats,
 	
 	/salestats/dailystats/id : Returns a single daily sale stats by searching for its id.
 	
-	POST:	
+   POST:	
 	
 	/salestats/dailystats : Creates a new daily sales stats.
 	
-	PUT:
+   PUT:
 	
 	/salestats/dailystats/{id} : Updates an existing daily sales stats based on its ID.
 	
-	DELETE:
+   DELETE:
 	
 	/salestats/dailystats/{id} : Deletes an existing daily sales stats based on its ID.
 
 -   Monthly Sale Stats
 
-	GET:	
+   GET:	
 	
 	/salestats/monthlystats : Lists all of the existing monthly sales stats,
 	
 	/salestats/monthlystats/id : Returns a single monthly sale stats by searching for its id.
 	
-	POST:	
+   POST:	
 	
 	/salestats/monthlystats : Creates a new monthly sales stats.
 	
-	PUT:
+   PUT:
 	
 	/salestats/monthlystats/{id} : Updates an existing monthly sales stats based on its ID.
 	
-	DELETE:
+   DELETE:
 	
 	/salestats/monthlystats/{id} : Deletes an existing monthly sales stats based on its ID.

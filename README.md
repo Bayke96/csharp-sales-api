@@ -131,20 +131,20 @@ ROUTES:
 
 -   Monthly Sale Stats
 
-   GET:		
+   GET   :		
 	
 	 /salestats/monthlystats : Lists all of the existing monthly sales stats,
 	
 	 /salestats/monthlystats/id : Returns a single monthly sale stats by searching for its id.
 	
-   POST:	
+   POST   :	
 	
 	 /salestats/monthlystats : Creates a new monthly sales stats.
 	
-   PUT:
+   PUT   :
 	
 	 /salestats/monthlystats/{id} : Updates an existing monthly sales stats based on its ID.
 	
-   DELETE:
+   DELETE   :
 	
 	 /salestats/monthlystats/{id} : Deletes an existing monthly sales stats based on its ID.

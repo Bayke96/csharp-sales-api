@@ -28,6 +28,7 @@ ROUTES:
 	/inventory/categories/{order}/{orderby} : Lists all of the existing categories by Ascending or Descending order and by id, name or price.
 	
  Available  Params :
+ 
 	
 	Order: "asc", "desc".
 	

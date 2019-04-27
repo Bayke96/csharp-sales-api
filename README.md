@@ -58,7 +58,7 @@ ROUTES:
 	/inventory/products/{order}/{orderby} : Lists all of the existing products by Ascending or Descending order and by id, name, description, price 
 	or ammount existing in the inventory.
 	
- Available Params:
+	 Available Params:
 	
 	Order: "asc", "desc".
 	

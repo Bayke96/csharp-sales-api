@@ -94,6 +94,9 @@ ROUTES:
 	
 	OrderBy: "id", "date", "description", "total".
 	
+	
+	
+	
    POST:	
 	
 	/sales : Creates a new sale.

@@ -79,7 +79,7 @@ ROUTES:
 
 -   Sales
 
-	GET:
+   GET:	
 	
 	 /sales : Lists all of the existing sales,
 	
@@ -107,9 +107,11 @@ ROUTES:
 	
 	 /sales/{id} : Deletes an existing sale based on its ID.
 
+
 -   Daily Sale Stats
 
-    GET:	
+   GET:	
+	
 	
 	 /salestats/dailystats : Lists all of the existing daily sales stats,
 	
@@ -129,7 +131,7 @@ ROUTES:
 
 -   Monthly Sale Stats
 
-    GET:	
+   GET:		
 	
 	 /salestats/monthlystats : Lists all of the existing monthly sales stats,
 	

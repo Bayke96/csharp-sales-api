@@ -14,13 +14,12 @@ namespace InventoryAPI.Controllers
     public class SalesController : ApiController
     {
         private readonly string apiVersion = Resources.API_INFO.API_VERSION;
-        private readonly SaleServices saleService = new SaleServices();
 
         [HttpGet]
         [Route("sales")]
         public IHttpActionResult GetSales()
         {
-            var salesList = saleService.GetSales();
+            var salesList = SaleServices.GetSales();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -35,7 +34,7 @@ namespace InventoryAPI.Controllers
         [Route("sales/{order}/{orderby}")]
         public IHttpActionResult GetSaleOrder(string order, string orderBy)
         {
-            var salesList = saleService.GetSaleOrder(order.Trim(), orderBy.Trim());
+            var salesList = SaleServices.GetSaleOrder(order.Trim(), orderBy.Trim());
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -50,7 +49,7 @@ namespace InventoryAPI.Controllers
         [Route("sales/{id}")]
         public IHttpActionResult GetSale(int id)
         {
-            Sale sale = saleService.GetSale(id);
+            Sale sale = SaleServices.GetSale(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -72,7 +71,7 @@ namespace InventoryAPI.Controllers
         [Route("sales")]
         public HttpResponseMessage PostSale(Sale sale)
         {
-            var createdSale = saleService.CreateSale(sale);
+            var createdSale = SaleServices.CreateSale(sale);
 
             var response = Request.CreateResponse(HttpStatusCode.Created, sale, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
@@ -94,7 +93,7 @@ namespace InventoryAPI.Controllers
         [Route("sales/{saleID}")]
         public HttpResponseMessage UpdaleSale(int saleID, Sale sale)
         {
-            var updatedSale = saleService.UpdateSale(saleID, sale);
+            var updatedSale = SaleServices.UpdateSale(saleID, sale);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedSale, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
@@ -121,7 +120,7 @@ namespace InventoryAPI.Controllers
         [Route("sales/{saleID}")]
         public HttpResponseMessage DeleteSale(int saleID)
         {
-            var deletedSale = saleService.DeleteSale(saleID);
+            var deletedSale = SaleServices.DeleteSale(saleID);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedSale, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);

@@ -14,13 +14,12 @@ namespace InventoryAPI.Controllers
     public class ProductsController : ApiController
     {
         private readonly string apiVersion = Resources.API_INFO.API_VERSION;
-        private readonly ProductServices productService = new ProductServices();
 
         [HttpGet]
         [Route("inventory/products")]
         public IHttpActionResult GetProducts()
         {
-            var productList = productService.GetProduct();
+            var productList = ProductServices.GetProduct();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -35,7 +34,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/products/{order}/{orderby}")]
         public IHttpActionResult GetProductOrder(string order, string orderBy)
         {
-            var productList = productService.GetProductOrder(order.Trim(), orderBy.Trim());
+            var productList = ProductServices.GetProductOrder(order.Trim(), orderBy.Trim());
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -50,7 +49,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/products/{id}")]
         public IHttpActionResult GetProduct(int id)
         {
-            Product product = productService.GetProduct(id);
+            Product product = ProductServices.GetProduct(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -72,7 +71,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/products/name/{name}")]
         public IHttpActionResult GetProduct(string name)
         {
-            Product product = productService.GetProduct(name);
+            Product product = ProductServices.GetProduct(name);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -94,7 +93,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/products")]
         public HttpResponseMessage PostProduct(Product product)
         {
-            var createdProduct = productService.CreateProduct(product);
+            var createdProduct = ProductServices.CreateProduct(product);
 
             // If product already exists within database, return 409.
             if (createdProduct == null)
@@ -130,7 +129,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/products/{productID}")]
         public HttpResponseMessage UpdateProduct(int productID, Product product)
         {
-            var updatedProduct = productService.UpdateProduct(productID, product);
+            var updatedProduct = ProductServices.UpdateProduct(productID, product);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedProduct, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
@@ -157,7 +156,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/products/{productID}")]
         public HttpResponseMessage DeleteProduct(int productID)
         {
-            var deletedProduct = productService.DeleteProduct(productID);
+            var deletedProduct = ProductServices.DeleteProduct(productID);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedProduct, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);

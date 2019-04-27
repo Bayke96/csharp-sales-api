@@ -18,13 +18,12 @@ namespace InventoryAPI.Controllers
     public class CategoriesController : ApiController
     {
         private readonly string apiVersion = Resources.API_INFO.API_VERSION;
-        private readonly CategoryServices categoryService = new CategoryServices();
         
         [HttpGet]
         [Route("inventory/categories")]
         public IHttpActionResult GetCategory()
         {
-            var categoryList = categoryService.GetCategory();
+            var categoryList = CategoryServices.GetCategory();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -39,7 +38,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/categories/{order}/{orderby}")]
         public IHttpActionResult GetCategoryOrder(string order, string orderBy)
         {
-            var categoryList = categoryService.GetCategoryOrder(order.Trim(), orderBy.Trim());
+            var categoryList = CategoryServices.GetCategoryOrder(order.Trim(), orderBy.Trim());
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -54,7 +53,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/categories/{id}")]
         public IHttpActionResult GetCategory(int id)
         {
-            Category category = categoryService.GetCategory(id);
+            Category category = CategoryServices.GetCategory(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -76,7 +75,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/categories/name/{name}")]
         public IHttpActionResult GetCategory(string name)
         {
-            Category category = categoryService.GetCategory(name);
+            Category category = CategoryServices.GetCategory(name);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -98,7 +97,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/categories")]
         public HttpResponseMessage PostCategory(Category category)
         {
-            var createdCategory = categoryService.CreateCategory(category);
+            var createdCategory = CategoryServices.CreateCategory(category);
 
             // If product already exists within database, return 409.
             if(createdCategory == null)
@@ -134,7 +133,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/categories/{categoryID}")]
         public HttpResponseMessage UpdateCategory(int categoryID, Category category)
         {
-            var updatedCategory = categoryService.UpdateCategory(categoryID, category);
+            var updatedCategory = CategoryServices.UpdateCategory(categoryID, category);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedCategory, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
@@ -161,7 +160,7 @@ namespace InventoryAPI.Controllers
         [Route("inventory/categories/{categoryID}")]
         public HttpResponseMessage DeleteCategory(int categoryID)
         {
-            var deletedCategory = categoryService.DeleteCategory(categoryID);
+            var deletedCategory = CategoryServices.DeleteCategory(categoryID);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedCategory, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);

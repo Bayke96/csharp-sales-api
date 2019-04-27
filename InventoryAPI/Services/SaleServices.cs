@@ -10,7 +10,7 @@ namespace InventoryAPI.Services
 {
     public class SaleServices
     {
-        public List<Sale> GetSales()
+        public static List<Sale> GetSales()
         {
             using (var context = new ServicesContext())
             {
@@ -19,7 +19,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public List<Sale> GetSaleOrder(string order, string orderBy)
+        public static List<Sale> GetSaleOrder(string order, string orderBy)
         {
             List<Sale> allSales = new List<Sale>();
 
@@ -44,7 +44,7 @@ namespace InventoryAPI.Services
                         allSales = context.Sales.OrderBy(b => b.saleTotal).ToList();
                     }
                 }
-                else
+                if (order.ToUpper(CultureInfo.InvariantCulture) == "DESC")
                 {
                     if (orderBy.ToUpperInvariant() == "ID")
                     {
@@ -67,7 +67,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Sale GetSale(int id)
+        public static Sale GetSale(int id)
         {
             using (var context = new ServicesContext())
             {
@@ -76,7 +76,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Sale CreateSale(Sale sale)
+        public static Sale CreateSale(Sale sale)
         {
             using (var context = new ServicesContext())
             {
@@ -121,7 +121,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Sale UpdateSale(int saleID, Sale sale)
+        public static Sale UpdateSale(int saleID, Sale sale)
         {
             using (var context = new ServicesContext())
             {
@@ -145,7 +145,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Sale DeleteSale(int saleID)
+        public static Sale DeleteSale(int saleID)
         {
             using (var context = new ServicesContext())
             {

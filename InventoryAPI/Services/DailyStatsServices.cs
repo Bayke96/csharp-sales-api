@@ -9,7 +9,7 @@ namespace InventoryAPI.Services
 {
     public class DailyStatsServices
     {
-        public List<DailyStats> GetDailyStats()
+        public static List<DailyStats> GetDailyStats()
         {
             using (var context = new ServicesContext())
             {
@@ -18,7 +18,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public DailyStats GetDailyStat(int id)
+        public static DailyStats GetDailyStat(int id)
         {
             using (var context = new ServicesContext())
             {
@@ -27,7 +27,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public DailyStats CreateDailyStat(DailyStats dailyStat)
+        public static DailyStats CreateDailyStat(DailyStats dailyStat)
         {
             using (var context = new ServicesContext())
             {
@@ -50,7 +50,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public DailyStats UpdateDailyStat(int statID, DailyStats dailyStat)
+        public static DailyStats UpdateDailyStat(int statID, DailyStats dailyStat)
         {
             using (var context = new ServicesContext())
             {
@@ -73,7 +73,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public DailyStats DeleteDailyStat(int statID)
+        public static DailyStats DeleteDailyStat(int statID)
         {
             using (var context = new ServicesContext())
             {

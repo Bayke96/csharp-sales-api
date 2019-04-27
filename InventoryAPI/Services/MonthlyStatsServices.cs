@@ -9,7 +9,7 @@ namespace InventoryAPI.Services
 {
     public class MonthlyStatsServices
     {
-        public List<MonthlyStats> GetMonthlyStats()
+        public static List<MonthlyStats> GetMonthlyStats()
         {
             using (var context = new ServicesContext())
             {
@@ -18,7 +18,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public MonthlyStats GetMonthlyStat(int id)
+        public static MonthlyStats GetMonthlyStat(int id)
         {
             using (var context = new ServicesContext())
             {
@@ -27,7 +27,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public MonthlyStats CreateMonthlyStat(MonthlyStats monthlyStat)
+        public static MonthlyStats CreateMonthlyStat(MonthlyStats monthlyStat)
         {
             using (var context = new ServicesContext())
             {
@@ -50,7 +50,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public MonthlyStats UpdateMonthlyStat(int statID, MonthlyStats monthlyStat)
+        public static MonthlyStats UpdateMonthlyStat(int statID, MonthlyStats monthlyStat)
         {
             using (var context = new ServicesContext())
             {
@@ -73,7 +73,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public MonthlyStats DeleteMonthlyStat(int statID)
+        public static MonthlyStats DeleteMonthlyStat(int statID)
         {
             using (var context = new ServicesContext())
             {

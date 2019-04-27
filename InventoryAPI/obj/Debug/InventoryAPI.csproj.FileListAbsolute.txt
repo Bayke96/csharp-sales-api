@@ -67,3 +67,4 @@ C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.csproj.CopyComplete
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.dll
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.pdb
+C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.csprojAssemblyReference.cache

@@ -11,7 +11,7 @@ namespace InventoryAPI.Services
 {
     public class CategoryServices
     {
-        public List<Category> GetCategory()
+        public static List<Category> GetCategory()
         {
             using(var context = new ServicesContext())
             {
@@ -20,7 +20,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public List<Category> GetCategoryOrder(string order, string orderBy)
+        public static List<Category> GetCategoryOrder(string order, string orderBy)
         {
             List<Category> allCategories = new List<Category>();
 
@@ -41,7 +41,7 @@ namespace InventoryAPI.Services
                         allCategories = context.Categories.OrderBy(b => b.ammountProducts).ToList();
                     }
                 }
-                else
+                if (order.ToUpper(CultureInfo.InvariantCulture) == "DESC")
                 {
                     if (orderBy.ToUpperInvariant() == "ID")
                     {
@@ -60,7 +60,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Category GetCategory(int id)
+        public static Category GetCategory(int id)
         {
             using(var context = new ServicesContext())
             {
@@ -69,7 +69,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Category GetCategory(string name)
+        public static Category GetCategory(string name)
         {
             string searchName = name.ToUpper(CultureInfo.InvariantCulture).Trim();
             using (var context = new ServicesContext())
@@ -80,7 +80,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Category CreateCategory(Category category)
+        public static Category CreateCategory(Category category)
         {
             using(var context = new ServicesContext())
             {
@@ -108,7 +108,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Category UpdateCategory(int categoryID, Category category)
+        public static Category UpdateCategory(int categoryID, Category category)
         {
             using (var context = new ServicesContext())
             {
@@ -131,7 +131,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Category DeleteCategory(int categoryID)
+        public static Category DeleteCategory(int categoryID)
         {
             using(var context = new ServicesContext())
             {

@@ -14,13 +14,12 @@ namespace InventoryAPI.Controllers
     public class MonthlyStatsController : ApiController
     {
         private readonly string apiVersion = Resources.API_INFO.API_VERSION;
-        private readonly MonthlyStatsServices MonthlyStatsService = new MonthlyStatsServices();
 
         [HttpGet]
         [Route("salestats/monthlystats")]
         public IHttpActionResult GetMonthlyStats()
         {
-            var MonthlyStatsList = MonthlyStatsService.GetMonthlyStats();
+            var MonthlyStatsList = MonthlyStatsServices.GetMonthlyStats();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -35,7 +34,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/monthlystats/{id}")]
         public IHttpActionResult GetMonthlyStat(int id)
         {
-            MonthlyStats monthlyStats = MonthlyStatsService.GetMonthlyStat(id);
+            MonthlyStats monthlyStats = MonthlyStatsServices.GetMonthlyStat(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -57,7 +56,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/monthlystats")]
         public HttpResponseMessage PostMonthlyStat(MonthlyStats monthlyStat)
         {
-            var createdMonthlyStat = MonthlyStatsService.CreateMonthlyStat(monthlyStat);
+            var createdMonthlyStat = MonthlyStatsServices.CreateMonthlyStat(monthlyStat);
 
             // If stats already exists within database, return 409.
             if (createdMonthlyStat == null)
@@ -93,7 +92,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/monthlystats/{statID}")]
         public HttpResponseMessage UpdateMonthlyStats(int statID, MonthlyStats monthlyStat)
         {
-            var updatedMonthlyStat = MonthlyStatsService.UpdateMonthlyStat(statID, monthlyStat);
+            var updatedMonthlyStat = MonthlyStatsServices.UpdateMonthlyStat(statID, monthlyStat);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedMonthlyStat, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
@@ -120,7 +119,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/monthlystats/{statID}")]
         public HttpResponseMessage DeleteMonthlyStats(int statID)
         {
-            var deletedMonthlyStat = MonthlyStatsService.DeleteMonthlyStat(statID);
+            var deletedMonthlyStat = MonthlyStatsServices.DeleteMonthlyStat(statID);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedMonthlyStat, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);

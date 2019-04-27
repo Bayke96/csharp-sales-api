@@ -10,7 +10,7 @@ namespace InventoryAPI.Services
 {
     public class ProductServices
     {
-        public List<Product> GetProduct()
+        public static List<Product> GetProduct()
         {
             using (var context = new ServicesContext())
             {
@@ -19,7 +19,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public List<Product> GetProductOrder(string order, string orderBy)
+        public static List<Product> GetProductOrder(string order, string orderBy)
         {
             List<Product> allProducts = new List<Product>();
 
@@ -48,7 +48,7 @@ namespace InventoryAPI.Services
                         allProducts = context.Products.OrderBy(b => b.productAmmount).ToList();
                     }
                 }
-                else
+                if (order.ToUpper(CultureInfo.InvariantCulture) == "DESC")
                 {
                     if (orderBy.ToUpperInvariant() == "ID")
                     {
@@ -75,7 +75,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Product GetProduct(int id)
+        public static Product GetProduct(int id)
         {
             using (var context = new ServicesContext())
             {
@@ -84,7 +84,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Product GetProduct(string name)
+        public static Product GetProduct(string name)
         {
             string searchName = name.ToUpper(CultureInfo.InvariantCulture).Trim();
             using (var context = new ServicesContext())
@@ -95,7 +95,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Product CreateProduct(Product product)
+        public static Product CreateProduct(Product product)
         {
             using (var context = new ServicesContext())
             {
@@ -128,7 +128,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Product UpdateProduct(int productID, Product product)
+        public static Product UpdateProduct(int productID, Product product)
         {
             using (var context = new ServicesContext())
             {
@@ -163,7 +163,7 @@ namespace InventoryAPI.Services
             }
         }
 
-        public Product DeleteProduct(int productID)
+        public static Product DeleteProduct(int productID)
         {
             using (var context = new ServicesContext())
             {

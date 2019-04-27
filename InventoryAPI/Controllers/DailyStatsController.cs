@@ -14,13 +14,12 @@ namespace InventoryAPI.Controllers
     public class DailyStatsController : ApiController
     {
         private readonly string apiVersion = Resources.API_INFO.API_VERSION;
-        private readonly DailyStatsServices dailyStatsService = new DailyStatsServices();
 
         [HttpGet]
         [Route("salestats/dailystats")]
         public IHttpActionResult GetDailyStats()
         {
-            var dailyStatsList = dailyStatsService.GetDailyStats();
+            var dailyStatsList = DailyStatsServices.GetDailyStats();
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
             HttpContext.Current.Response.AppendHeader("Response-Type", "JSON");
@@ -35,7 +34,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/dailystats/{id}")]
         public IHttpActionResult GetDailyStat(int id)
         {
-            DailyStats dailyStat = dailyStatsService.GetDailyStat(id);
+            DailyStats dailyStat = DailyStatsServices.GetDailyStat(id);
 
             HttpContext.Current.Response.AppendHeader("API-Version", apiVersion);
 
@@ -57,7 +56,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/dailystats")]
         public HttpResponseMessage PostDailyStat(DailyStats dailyStat)
         {
-            var createdDailyStat = dailyStatsService.CreateDailyStat(dailyStat);
+            var createdDailyStat = DailyStatsServices.CreateDailyStat(dailyStat);
 
             // If stats already exists within database, return 409.
             if (createdDailyStat == null)
@@ -93,7 +92,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/dailystats/{statID}")]
         public HttpResponseMessage UpdateDailyStats(int statID, DailyStats dailyStat)
         {
-            var updatedDailyStat = dailyStatsService.UpdateDailyStat(statID, dailyStat);
+            var updatedDailyStat = DailyStatsServices.UpdateDailyStat(statID, dailyStat);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, updatedDailyStat, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);
@@ -120,7 +119,7 @@ namespace InventoryAPI.Controllers
         [Route("salestats/dailystats/{statID}")]
         public HttpResponseMessage DeleteDailyStats(int statID)
         {
-            var deletedDailyStat = dailyStatsService.DeleteDailyStat(statID);
+            var deletedDailyStat = DailyStatsServices.DeleteDailyStat(statID);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, deletedDailyStat, Configuration.Formatters.JsonFormatter);
             response.Headers.Add("API-Version", apiVersion);

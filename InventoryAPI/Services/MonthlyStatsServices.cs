@@ -9,7 +9,7 @@ namespace InventoryAPI.Services
 {
     public class MonthlyStatsServices
     {
-        public List<MonthlyStats> GetDailyStats()
+        public List<MonthlyStats> GetMonthlyStats()
         {
             using (var context = new ServicesContext())
             {

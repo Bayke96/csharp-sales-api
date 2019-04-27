@@ -80,20 +80,37 @@ namespace InventoryAPI.Services
         {
             using (var context = new ServicesContext())
             {
+                var currentDate = DateTime.Now.Date;
                 // Check if there's already a sales stat for this day.
                 var findDailyStat = context.dailyStats.FirstOrDefault
-                    (b => b.salesDate == DateTime.Now);
+                    (b => b.salesDate == currentDate);
 
-                // If there is, sum one to the counter.
-                if (findDailyStat != null)
-                {
+                var findMonthlyStat = context.monthlyStats.FirstOrDefault
+                    (b => b.salesMonth == DateTime.Now.Month && b.salesYear == DateTime.Now.Year);
+
+                // If there is an existing daily stat, sum one to the counter.
+                if (findDailyStat != null) {
                     findDailyStat.productsSold++;
                 }
                 // If there isn't, create a new stat for this day.
+                else {
+                    DailyStats newStats = new DailyStats();
+                    newStats.productsSold++;
+                    context.dailyStats.Add(newStats);
+                }
+
+                // If the monthly stat already exists, sum one to the counter of that month.
+                if (findMonthlyStat != null) {
+                    findMonthlyStat.productsSold++;
+                }
+                // If there isn't an existing monthly stat, create one.
                 else
                 {
-                    context.dailyStats.Add(new DailyStats());
+                    MonthlyStats newStats = new MonthlyStats();
+                    newStats.productsSold++;
+                    context.monthlyStats.Add(newStats);
                 }
+
 
                 // Sale object corrections
                 sale.saleDescription = sale.saleDescription.Trim();

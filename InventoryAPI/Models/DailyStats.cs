@@ -17,7 +17,7 @@ namespace InventoryAPI.Models
         public int ID { get; private set; }
 
         [Column("date"), Index(IsUnique = true), Required]
-        public DateTime salesDate { get; set; } = DateTime.Today;
+        public DateTime salesDate { get; set; } = DateTime.Today.Date;
 
         [Column("items_sold"), Required]
         public int productsSold { get; set; } = 0;

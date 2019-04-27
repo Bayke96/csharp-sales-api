@@ -61,7 +61,6 @@ C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\bin\System.Web.Http.xml
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\bin\System.Web.Http.WebHost.xml
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\bin\Newtonsoft.Json.xml
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.csprojAssemblyReference.cache
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.Resources.API_INFO.resources
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.csproj.GenerateResource.cache
 C:\Users\Cristian\source\repos\InventoryAPI\InventoryAPI\obj\Debug\InventoryAPI.csproj.CoreCompileInputs.cache

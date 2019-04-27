@@ -21,7 +21,7 @@ namespace InventoryAPI.Models
         public int salesYear { get; set; } = DateTime.Now.Year;
 
         [Column("monthly_sales"), Required]
-        public int productsSold { get; set; }
+        public int productsSold { get; set; } = 0;
 
     }
 }

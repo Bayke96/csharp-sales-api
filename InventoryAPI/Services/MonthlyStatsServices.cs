@@ -7,7 +7,7 @@ using System.Web;
 
 namespace InventoryAPI.Services
 {
-    public class MonthlyStatsServices
+    public static class MonthlyStatsServices
     {
         public static List<MonthlyStats> GetMonthlyStats()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,8 +19,9 @@ namespace InventoryAPI.Models
         public string categoryName { get; set; }
 
         [Column("cat_products")]
+        [DefaultValue(0)]
         [Required]
-        public int ammountProducts { get; set; } = 0;
+        public int ammountProducts { get; set; }
 
     }
 }

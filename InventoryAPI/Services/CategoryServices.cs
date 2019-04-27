@@ -9,7 +9,7 @@ using System.Web;
 
 namespace InventoryAPI.Services
 {
-    public class CategoryServices
+    public static class CategoryServices
     {
         public static List<Category> GetCategory()
         {

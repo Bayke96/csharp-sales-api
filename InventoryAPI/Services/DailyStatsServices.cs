@@ -7,7 +7,7 @@ using System.Web;
 
 namespace InventoryAPI.Services
 {
-    public class DailyStatsServices
+    public static class DailyStatsServices
     {
         public static List<DailyStats> GetDailyStats()
         {

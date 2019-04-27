@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace InventoryAPI.Models
         public int salesYear { get; set; } = DateTime.Now.Year;
 
         [Column("monthly_sales"), Required]
-        public int productsSold { get; set; } = 0;
+        [DefaultValue(0)]
+        public int productsSold { get; set; }
 
     }
 }

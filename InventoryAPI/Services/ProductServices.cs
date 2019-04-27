@@ -8,7 +8,7 @@ using System.Web;
 
 namespace InventoryAPI.Services
 {
-    public class ProductServices
+    public static class ProductServices
     {
         public static List<Product> GetProduct()
         {

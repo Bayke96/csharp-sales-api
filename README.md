@@ -107,21 +107,21 @@ ROUTES:
 
 -   Daily Sale Stats
 
-   GET:	
+      GET:	
 	
 	/salestats/dailystats : Lists all of the existing daily sales stats,
 	
 	/salestats/dailystats/id : Returns a single daily sale stats by searching for its id.
 	
-   POST:	
+      POST:	
 	
 	/salestats/dailystats : Creates a new daily sales stats.
 	
-   PUT:
+      PUT:
 	
 	/salestats/dailystats/{id} : Updates an existing daily sales stats based on its ID.
 	
-   DELETE:
+      DELETE:
 	
 	/salestats/dailystats/{id} : Deletes an existing daily sales stats based on its ID.
 
@@ -129,18 +129,18 @@ ROUTES:
 
       GET:	
 	
-	/salestats/monthlystats : Lists all of the existing monthly sales stats,
+	   /salestats/monthlystats : Lists all of the existing monthly sales stats,
 	
-	/salestats/monthlystats/id : Returns a single monthly sale stats by searching for its id.
+	   /salestats/monthlystats/id : Returns a single monthly sale stats by searching for its id.
 	
       POST:	
 	
-	/salestats/monthlystats : Creates a new monthly sales stats.
+	   /salestats/monthlystats : Creates a new monthly sales stats.
 	
       PUT:
 	
-	/salestats/monthlystats/{id} : Updates an existing monthly sales stats based on its ID.
+	   /salestats/monthlystats/{id} : Updates an existing monthly sales stats based on its ID.
 	
       DELETE:
 	
-	/salestats/monthlystats/{id} : Deletes an existing monthly sales stats based on its ID.
+	   /salestats/monthlystats/{id} : Deletes an existing monthly sales stats based on its ID.

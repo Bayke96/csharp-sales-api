@@ -78,7 +78,7 @@ ROUTES:
 
 -   Sales
 
-   GET   :
+      GET:
 	
 	/sales : Lists all of the existing sales,
 	

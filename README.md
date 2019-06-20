@@ -1,5 +1,7 @@
 # csharp-sales-api
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/58918d55bdb1444ab9e5d5bbf99ec82e)](https://app.codacy.com/app/Bayke96/csharp-sales-api?utm_source=github.com&utm_medium=referral&utm_content=Bayke96/csharp-sales-api&utm_campaign=Badge_Grade_Dashboard)
+
 RESTful Sales / Inventory CRUD API created using C# and Entity Framework 6.0
 
 Version 1.0, it contains the following operations:
